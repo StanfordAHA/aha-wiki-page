@@ -2,3 +2,10 @@ title: AHA wiki page
 remote_theme: sighingnow/jekyll-gitbook
 toc:
   enabled: true
+  h_min: 1
+  h_max: 3
+permalink: /:categories/:year-:month-:day-:title:output_ext
+collections:
+  pages:
+    output: true
+    permalink: /:collection/:path/
