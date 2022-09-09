@@ -1,5 +1,8 @@
 title: AHA wiki page
 remote_theme: sighingnow/jekyll-gitbook
+url: 'https://paying4529.github.io'
+baseurl: '/aha-wiki-page'
+rss: RSS
 toc:
   enabled: true
   h_min: 1
