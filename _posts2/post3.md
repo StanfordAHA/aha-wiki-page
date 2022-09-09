@@ -2,7 +2,6 @@
 title: Post 3 title
 author: XXX
 date: 2022-09-08
-category: category3
 layout: post
 ---
 

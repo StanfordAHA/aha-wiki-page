@@ -7,7 +7,7 @@ toc:
 collections:
   posts1:
     output: true
-    permalink: /:collection/:year-:month-:day-:title:output_ext
+    permalink: /:collection/:year-:month-:day-:title
   posts2:
     output: true
-    permalink: /:collection/:year-:month-:day-:title:output_ext
+    permalink: /:collection/:year-:month-:day-:title
