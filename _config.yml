@@ -6,6 +6,9 @@ toc:
   h_max: 3
 permalink: /:categories/:year-:month-:day-:title:output_ext
 collections:
-  pages:
+  posts1:
+    output: true
+    permalink: /:collection/:path/
+  posts2:
     output: true
     permalink: /:collection/:path/
