@@ -4,11 +4,10 @@ toc:
   enabled: true
   h_min: 1
   h_max: 3
-permalink: /:categories/:year-:month-:day-:title:output_ext
 collections:
   posts1:
     output: true
-    permalink: /:collection/:path/
+    permalink: /:collection/:year-:month-:day-:title:output_ext
   posts2:
     output: true
-    permalink: /:collection/:path/
+    permalink: /:collection/:year-:month-:day-:title:output_ext
