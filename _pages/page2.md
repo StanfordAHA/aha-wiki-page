@@ -1,7 +1,7 @@
 ---
 title: Page 2 title
 author: XXX
-date: YYYY-MM-DD
+date: 2022-09-08
 layout: post
 ---
 
