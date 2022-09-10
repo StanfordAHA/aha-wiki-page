@@ -1,9 +1,9 @@
 ---
-title: Page 2 title
+title: About AHA
 author: XXX
 date: 2022-09-08
 layout: post
 ---
 
 
-This is an page 2.
+This is an about page.

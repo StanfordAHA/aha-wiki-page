@@ -1,9 +1,9 @@
 ---
-title: Page 1 title
+title: People
 author: XXX
 date: 2022-09-08
 layout: post
 ---
 
 
-This is an page 1.
+This is an people page.
