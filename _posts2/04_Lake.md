@@ -8,7 +8,7 @@ layout: post
 
 # MEM tile
 
-![Image](/assets/mem_tile.PNG)
+![Image](/assets/aha_wiki_page/mem_tile.PNG)
 
 Figure above is the block diagram of a MEM tile. We use a wide-fetch 
 single-port SRAM with three unified buffers inside. Two of them (AGG 
