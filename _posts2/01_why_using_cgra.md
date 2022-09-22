@@ -34,8 +34,14 @@ GRAs manipulate groups of bits via complex functional units (PEs) and the interc
 
 
 ## Reference
-[1] https://people.ece.uw.edu/hauck/publications/ConfigCompute.pdf
+[1] [https://people.ece.uw.edu/hauck/publications/ConfigCompute.pdf][1]
 
-[2] https://indico.cern.ch/event/78644/attachments/1059010/1510107/dyn_reconf.handouts.pdf
+[2] [https://indico.cern.ch/event/78644/attachments/1059010/1510107/dyn_reconf.handouts.pdf][2]
 
-[3] https://link.springer.com/chapter/10.1007/978-3-319-78890-6_53
+[3] [https://link.springer.com/chapter/10.1007/978-3-319-78890-6_53][3]
+
+
+
+[1]: https://people.ece.uw.edu/hauck/publications/ConfigCompute.pdf
+[2]: https://indico.cern.ch/event/78644/attachments/1059010/1510107/dyn_reconf.handouts.pdf
+[3]: https://link.springer.com/chapter/10.1007/978-3-319-78890-6_53
