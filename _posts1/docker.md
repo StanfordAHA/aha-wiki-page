@@ -88,7 +88,7 @@ we call `docker ps` again.
 
 #### Attach, Detach container
 
-To attach to Docker container, we use `docker attach` command.
+To attach to Docker container after we create it, we use `docker attach` command.
 
     docker attach <container-name>
 
@@ -104,7 +104,20 @@ mode, we can use `docker stop` command to stop a running container.
     docker stop <container-name>
 
 
+## Update Docker
+To get everything up to date, it is better to run `apt update`. Since `vim` is 
+not installed in the docker yet, we can install vim to make things eaiser. 
 
+    apt update
+    apt install -y vim
+
+
+
+
+### Other Useful Stuff
+To check the history commands:
+
+    history
 
 
 
