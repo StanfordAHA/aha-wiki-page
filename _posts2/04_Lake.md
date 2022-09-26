@@ -112,11 +112,12 @@ outer loop would occur at `stride_y*1 + offset = 10*1 + 1 = cycle 11`. And the c
 `stride_x` and so on. 
 
 
-
-
-
 ## Tool
 Use [Kratos](https://kratos-doc.readthedocs.io/en/latest/index.html), which is a python library, to generate Lake RTL code.
+
+
+
+
 
 
 

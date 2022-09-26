@@ -87,7 +87,13 @@ To generate the log file about critical path, we can use `aha sta` command. The 
 
 
 ### Visualization
-TBD
+The `aha sta` command would call `/aha/archipelago/visualize.py`. It would produce `./bin/pnr_result_{width}.png` for visualization. See `aha/aha/util/sta.py` for more details. 
+
+    python3 -m pip install --upgrade pip
+    python3 -m pip install --upgrade Pillow
+    aha sta apps/<app name> --visualize
+
+
 
 
 
