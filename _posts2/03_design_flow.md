@@ -50,7 +50,7 @@ The application is written in high-level DSL called **Halide**, which is embedde
 ### Usage 
 Inside the Docker container, we use Gaussian application as example. 
 
-In `/aha/aha/util/regress.py` we can see there are different setting suggestion for different applications. For example, the suggested `HALIDE_GEN_ARGS` is `"mywidth=62 myunroll=2 schedule=3"` for gaussian application. We need to **set HALIDE_GEN_ARGS before compiling the apps**.
+In `/aha/aha/util/regress.py` we can see there are different setting suggestion for different applications. For example, the suggested `HALIDE_GEN_ARGS` is `"mywidth=62 myunroll=2 schedule=3"` for gaussian application. We need to **set HALIDE_GEN_ARGS before compiling the apps**. 
 
     cd /aha/Halide-to-Hardware/apps/hardware_benchmarks/apps/gaussian
     export HALIDE_GEN_ARGS="mywidth=62 myunroll=2 schedule=3" 
@@ -70,7 +70,7 @@ We can use the following command to map the CoreIR graph onto the CGRA. The `wid
 
 After running the command, the bitstream file would be saved in `./bin/gaussian.bs`. 
 
-The placement file would be saved in `./bin/design.place`. We can see the x and y coordinates and the functions of each tile. 
+The placement file would be saved in `./bin/design.place`. We can see the x and y coordinates and the functions of each tile. The connection edges among each tile for the application is in `./bin/design.packed`. And `./bin/design.route` would show the actual track and `./bin/design.freq` wold show the frequency in MHz unit.
 
 
 ### Testing 
