@@ -8,15 +8,11 @@ layout: post
 From [Github repo Correspondence](05_repo_correspondence.md), MEM tile is specified in [`./strg_ub_vec.py`](https://github.com/StanfordAHA/lake/blob/f7f2b501e91ac4764e0f94a9247079adf0eb3d99/lake/modules/strg_ub_vec.py). And Lake architecture overview is explained [here](04_Lake.md). When looking into .py file, we can see lots of module names, so let's try to link those together. 
 
 ## StrgUBVec
-- inputs: 
-    data_from_strg => tb_only
-- outputs:
-    ren_to_strg <= sram_tb_shared
-    wen_to_strg <= sram_only
-    addr_out <= sram_only
-    data_to_strg <= tb_only
-    
-data_in, data_out: used for chain
+
+    input  [1:0] [16:0] chain_data_in
+    input  [1:0] [16:0] data_in,
+    output [1:0] [16:0] data_out
+    output [1:0] accessor_output
 
 Every MEM tile has its own cycle counter, `cycle_count` in code, which would be used by SG to decide when READ/WRITE enable signal.
 Each MEM tile contains two AGGs, one SRAM and two TBs. We devide them into five partitions. 
@@ -91,15 +87,12 @@ ID corresponds to **for-loop**. It would output the **`mux_sel` signal** needed 
         +-- AggSramSharedAddrGen *2
         +-- AggSramSharedSchedGen *2
 
-`AggSRAMShared` only contains the affine controller between AGGs and SRAM. It contains **two AGs** and **two SGs**. SG here is used for generate READ enable from AGG and AG is used to read address for AGG. 
+`AggSRAMShared` only contains the affine controller between AGGs and SRAM. It contains **two AGs** and **two SGs**. The SG here is used to generate **READ enable from AGG**, which is also the **WRITE enable for SRAM**. The AG here is used to generate both the **WRITE address for SRAM** and the **READ address for AGG**, SRAM address is 9-bit and we would just take the LSB as the AGG READ address since AGG depth is 2. 
 
-The `agg_read_out` signal is the READ enable signal from SG, and the `agg_sram_shared_addr_out` signal is the READ address for AGG. 
-///////// Check this!
-
+The `agg_read_out` signal is the WRITE enable signal from SRAM, and the `agg_sram_shared_addr_out` signal is the WRITE address for SRAM. 
 
     output [1:0] agg_read_out
     output [1:0] [8:0] agg_sram_shared_addr_out
-
 
 
 ### StrgUBSRAMOnly
@@ -108,16 +101,10 @@ The `agg_read_out` signal is the READ enable signal from SG, and the `agg_sram_s
     +-- StrgUBSRAMOnly
         +-- AddrGen *2
 
-`SRAMOnly` also only contains the affine controller between AGGs and SRAM. It contains **two AGs**, which are used for generate address for SRAM. Simply say, this block gets the data from agg and then pass WRITE enable, WRITE address and data to SRAM. 
+`SRAMOnly` only contains the affine controller between SRAM and TBs. It contains **two AGs**, which are used for generate READ address for SRAM. The `t_read` signal is the READ enable signal of SRAM, receive from SG in `SRAMTBShared`.
 
-    input  [1:0] [3:0] [15:0] agg_data_out
-    input  [1:0] agg_read
-    output [3:0] [15:0] data_to_sram
-    output [8:0] addr_to_sram
-    output wen_to_sram
-
-
-
+    input  [1:0] t_read
+    output [1:0] [8:0] sram_read_addr_out,
 
 
 ### StrgUBSRAMTBShared
@@ -127,7 +114,7 @@ The `agg_read_out` signal is the READ enable signal from SG, and the `agg_sram_s
         +-- SchedGen *2 
         +-- ForLoop *2
 
-`SRAMTBShared` also only contains the affine controller between SRAM and TBs. It contains **two SGs** and **two IDs**. SG here is used for generate READ enable from SRAM. The `t_read_out` signal is the READ enable signal from SRAM. The `loops_sram2tb_mux_sel` signal is generated from ID. We support 6-D so mux sel signal is 3 bits.
+`SRAMTBShared` also only contains the affine controller between SRAM and TBs. It contains **two SGs** and **two IDs**. SG here is used for generate READ enable from SRAM. The `t_read_out` signal is the **READ enable from SRAM**, which is also the **WRITE enable for TB**. The `loops_sram2tb_mux_sel` signal is generated from ID. We support 6-D so mux sel signal is 3 bits.
 
     output [1:0] t_read_out
     output [1:0] [2:0] loops_sram2tb_mux_sel
@@ -142,7 +129,7 @@ The `agg_read_out` signal is the READ enable signal from SG, and the `agg_sram_s
         +-- ForLoop *2
         +-- tb (register file) 
 
-`TBOnly` conbines two TBs with **one register file of size 2*4**, 4 words each for 2 output ports, act as a transposed buffer between TB and output port. This `TBOnly` modules also contains the affine controller between TBs and output port. It contains **four AGs**, **two SGs** and **two IDs**. Two AGs generate the READ address for SRAM and the other two AGs generate the WRITE address for TB. SG is used to generate  
+`TBOnly` conbines two TBs with **one register file of size 2*4**, 4 words each for 2 output ports, act as a transposed buffer between TB and output port. This `TBOnly` modules also contains the affine controller between TBs and output port. It contains **four AGs**, **two SGs** and **two IDs**. Two AGs generate the WRITE address for TB and the other two AGs generate the READ address from TB. SG is used to generate READ enable of TB. 
 
 TB is PISO interface, so the input would be **four 16-bit data word**, and the output would be **one 16-bit data word** for each port. 
 
