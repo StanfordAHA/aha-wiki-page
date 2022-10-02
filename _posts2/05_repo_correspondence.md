@@ -26,8 +26,6 @@ The main function is called `create_cgra()` specified in `/aha/garnet/cgra/util.
 #### Lake
 Lake modules in under `/aha/lake/lake/modules/` folder. MEM tile is specified in `./strg_ub_vec.py`. ID is in `./for_loop.py`, AG is in `./addr_gen.py`, and SG is in `./spec/sched_gen.py`.
 
-If the `input` was added additional attribute `ConfigRegAttr`, it means that this `input` signal **could be reconfigured** directly by the compiler. This is where *reconfigurable* array comes from.
-
 
 ### Halide
 The `aha halide` command specified in `/aha/aha/util/halide.py`. It would find appications under `Halide-to-Hardware/apps/hardware_benchmarks/apps/` and store the map result under `./bin/map_result/` folder in the application folder. 

@@ -90,7 +90,7 @@ we call `docker ps` again.
 
 To attach to Docker container after we create it, we use `docker attach` command.
 
-    docker attach <container-name>
+    docker exec -it <container-name> bash
 
 When we are currently attach to Docker container, we can use 
 `ctrl+p ctrl+q` to detach from the Docker container.
