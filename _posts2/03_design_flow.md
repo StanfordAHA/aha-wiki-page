@@ -28,6 +28,9 @@ All of these DSL programs are based on a low-level DSL called **magma** which is
 Inside the Docker container, we generate **verilog of the CGRA** using the following command. The `width` and `height` flag represent **the size of the array** we want to generate. Although the size might be flexible for different applications, it's still better to generate a larger array so that we can have more tiles to use. Note that every flag needs to be included in the command.
 
     aha garnet --width 32 --height 16 --verilog --use_sim_sram --rv --sparse-cgra --sparse-cgra-combined
+    
+    for test:
+        aha garnet --width 32 --height 16 --verilog --rv --sparse-cgra --sparse-cgra-combined
 
 After running the command, it would save verilog file in `/aha/garnet/garnet.v`.
 
@@ -76,8 +79,7 @@ The placement file would be saved in `./bin/design.place`. We can see the x and 
 ### Testing 
 Then we can run glb test, if the thing goes well, it should show `glb mapping success` as well as the simulation time, cpu time and the data structure size. 
 
-    module load base
-    module load vcs
+    module load base incisive xcelium vcs verdi
     aha glb apps/gaussian
 
 

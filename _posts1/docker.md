@@ -118,6 +118,15 @@ not installed in the docker yet, we can install vim to make things eaiser.
 To check the history commands:
 
     history
+    git log --graph --oneline --all
+
+
+## Get the latest version
+Best way to get the latest version is to create a new docker.
+
+    git submodule update --init --recursive
+
+make sure kratos is on master, lake is on sparse_strawman, 
 
 
 

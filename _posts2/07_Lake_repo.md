@@ -7,12 +7,30 @@ layout: post
 
 From [Github repo Correspondence](05_repo_correspondence.md), MEM tile is specified in [`./strg_ub_vec.py`](https://github.com/StanfordAHA/lake/blob/f7f2b501e91ac4764e0f94a9247079adf0eb3d99/lake/modules/strg_ub_vec.py). And Lake architecture overview is explained [here](04_Lake.md). When looking into .py file, we can see lots of module names, so let's try to link those together. 
 
+## LakeTop
+
+    mode: "UB"
+    self.read_delay = 1 
+    self.fw_int = int(self.mem_width / self.data_width) = 64/16 = 4
+
+    input  [15:0] input_width_17_num_0     <= chain_data_in_0
+    input  [15:0] input_width_17_num_1     <= chain_data_in_1
+    input  [15:0] input_width_17_num_2     <= data_in_0
+    input  [15:0] input_width_17_num_3     <= data_in_1
+    output [15:0] output_width_17_num_0    => data_out_0
+    output [15:0] output_width_17_num_1    => data_out_1
+    output output_width_1_num_2            => stencil_valid
+
+
 ## StrgUBVec
 
-    input  [1:0] [16:0] chain_data_in
-    input  [1:0] [16:0] data_in,
-    output [1:0] [16:0] data_out
-    output [1:0] accessor_output
+    
+    input  [15:0] chain_data_in_f_0, chain_data_in_f_1
+    input  [15:0] data_in_f_0, data_in_f_1
+    output [15:0] data_out_f_0, data_out_f_1
+    output accessor_output_f_b_0, accessor_output_f_b_1
+
+    
 
 Every MEM tile has its own cycle counter, `cycle_count` in code, which would be used by SG to decide when READ/WRITE enable signal.
 Each MEM tile contains two AGGs, one SRAM and two TBs. We devide them into five partitions. 
@@ -57,7 +75,7 @@ We utilize the recurrence relation of ID and **replace multipliers by an adder, 
 
 
 #### SG
-SG generate **the READ/WRITE enable signal**. under the control of ID. SG would use the same AG architecture to calculate **the next cycle schedule**. SG would also gets `cycle_count` input from ID, recording **the current cycle number**. It can then compare the two result, and **generate enable signal (`valid_output`)** when the two results match.  
+SG generate **the READ/WRITE enable signal** under the control of ID. SG would use the same AG architecture to calculate **the next cycle schedule**. SG would also gets `cycle_count` input from ID, recording **the current cycle number**. It can then compare the next cycle schedule with the current cycle number, and **generate enable signal (`valid_output`)** when the two results match.  
 
     input  [15:0] cycle_count
     input  [15:0] sched_addr_gen_starting_addr
@@ -96,8 +114,10 @@ The `agg_read_out` signal is the WRITE enable signal from SRAM, and the `agg_sra
 
 
 #### AggSramSharedSchedGen
-Now SG is optimize to 4-to-1, in other words, it collects 4 data-words than pass READ enable signal to SRAM. But what if the range is not multiplicant of 4? 
-For example, in `resnet_tiny.json`, the range (the `extent` flag) is 14 now. AGG starts collecting data-word from cycle 0, SG would send out READ enable signal after collecting 4 data-words (`cycle_stride[0] = 4`) on cycle 4 (pass data from cycle 0,1,2,3), 8 (pass data from cycle 4,5,6,7), 12 (pass data from cycle 8,9,10,11). But the data-words collected at cycle 12 and cycle 13 are writen in AGG but haven't pass to SRAM yet. So we would specify `agg_read_padding` flag for `AggSramSharedSchedGen` to start counting at cycle 13 and generate the READ enable signal at cycle 16. 
+Now SG is optimize to **4-to-1**, in other words, it **collects 4 data-words than pass READ enable signal to SRAM**. But what if the range is not multiplicant of 4? 
+
+For example, in `resnet_tiny.json`, the range (the `extent` flag) is 14 now. AGG starts collecting data-word from cycle 0, SG would send out READ enable signal after collecting 4 data-words (`cycle_stride[0] = 4`) on cycle 4 (pass data from cycle 0,1,2,3), 8 (pass data from cycle 4,5,6,7), 12 (pass data from cycle 8,9,10,11). But the data-words collected at cycle 12 and cycle 13 are writen in AGG but haven't pass to SRAM yet. So we would specify `agg_read_padding` flag for `AggSramSharedSchedGen` to start counting at cycle 13 and generate the READ enable signal at cycle 16 (pass data from cycle 12,13). 
+
 In the mean time, data-words still coming in for the second loop start with cycle 14. So there would also READ enable on cycle 18 (pass data from cycle 14,15,16,17), 22 (pass data from 18,19,20,21), etc. 
     
     "in2agg_0":{
@@ -110,6 +130,7 @@ In the mean time, data-words still coming in for the second loop start with cycl
         "agg_read_padding":[3],
         "cycle_starting_addr":[4],
         "cycle_stride":[4,14],
+        "extent":[4,14]
         ...
 
 
