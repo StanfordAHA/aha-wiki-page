@@ -6,8 +6,8 @@ layout: post
 ---
 
 ## Get Started 
-Since there are so many different environments we need to 
-setup before we can actually run AHA project, we would use 
+Since there can be many different environments we need to 
+setup for development in the AHA project, we would use 
 **Docker** to make thing easier. 
 
 Docker is a tool that allows developers to easily deploy their 
@@ -15,7 +15,7 @@ applications in a container to run on the host operating system.
 The key benefit of Docker is that it allows users to 
 **package an application with all of its dependencies into a standardized unit**.
 
-But first, you need to contact *Keyi Zhang* to **setup your kiwi account** 
+But first, you need to contact *Can Wang* to **setup your kiwi account** 
 and **get permission to run the docker**. 
 
 
@@ -30,7 +30,7 @@ and **get permission to run the docker**.
 
 
 ## Using docker
-There would be some different layers when we use a docker. While we 
+There would be some different layers when we use a docker. We 
 only need to know an overview of **Docker Images** and **Docker Container**.
 
 
@@ -110,7 +110,6 @@ not installed in the docker yet, we can install vim to make things eaiser.
 
     apt update
     apt install -y vim
-
 
 
 
