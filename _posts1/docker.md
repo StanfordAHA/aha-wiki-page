@@ -16,7 +16,7 @@ The key benefit of Docker is that it allows users to
 **package an application with all of its dependencies into a standardized unit**.
 
 But first, you need to contact *Can Wang* to **setup your kiwi account** 
-and **get permission to run the docker**. 
+and **get added to the docker group**. 
 
 
 > ##### WARNING
@@ -24,7 +24,7 @@ and **get permission to run the docker**.
 > You might see a `permission denied` error after running docker 
 > command. This is because if you're on Linux, then you need to 
 > prefix your docker commands with `sudo`. In this case, you should 
-> make sure that *Keyi* had add your account into a docker group to 
+> make sure that *Can* had add your account into a docker group to 
 > get the permission of using Docker.
 {: .block-warning }
 
@@ -66,7 +66,7 @@ API or CLI.
     docker container ls
 
 We can use `docker ps` command to show all containers that are currently 
-running, which is exactly the same function with `docker container ls`.  
+running, which is exactly the same function as `docker container ls`.  
 
 
 #### Create containers
