@@ -6,4 +6,4 @@ layout: post
 ---
 
 
-This is an about page.
+This website is for onboarding new students into the AHA project. The website describes how to use docker and the basic AHA application flow.
