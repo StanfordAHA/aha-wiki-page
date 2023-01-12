@@ -7,8 +7,8 @@ layout: post
 
 ## Get Started 
 Since there can be many different environments we need to 
-setup for development in the AHA project, we would use 
-**Docker** to make thing easier. 
+setup for development in the AHA project, we use 
+**Docker** to make thing easier.
 
 Docker is a tool that allows developers to easily deploy their 
 applications in a container to run on the host operating system. 
@@ -30,12 +30,11 @@ and **get added to the docker group**.
 
 
 ## Using docker
-There would be some different layers when we use a docker. We 
-only need to know an overview of **Docker Images** and **Docker Container**.
+Here is a brief overview of **Docker Images** and **Docker Container**.
 
 
 ### Docker Image
-A *image* is a **read-only blueprints** of our application which 
+A *image* is a **read-only blueprint** of our application which 
 **form the basis of containers**. Often, an image is based on another 
 image, with some additional customization. 
 
@@ -106,7 +105,7 @@ mode, we can use `docker stop` command to stop a running container.
 
 ## Update Docker
 To get everything up to date, it is better to run `apt update`. Since `vim` is 
-not installed in the docker yet, we can install vim to make things eaiser. 
+not installed in the docker yet, we can install vim to make things easier. 
 
     apt update
     apt install -y vim
@@ -121,11 +120,10 @@ To check the history commands:
 
 
 ## Get the latest version
-Best way to get the latest version is to create a new docker.
+Best way to get the latest version is to create a new docker. To update an existing docker use:
 
     git submodule update --init --recursive
 
-make sure kratos is on master, lake is on sparse_strawman, 
 
 
 
