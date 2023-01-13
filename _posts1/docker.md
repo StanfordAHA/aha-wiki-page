@@ -15,7 +15,7 @@ applications in a container to run on the host operating system.
 The key benefit of Docker is that it allows users to 
 **package an application with all of its dependencies into a standardized unit**.
 
-But first, you need to contact *Can Wang* to **setup your kiwi account** 
+But first, you need to contact *Can Wang (canswang@stanford.edu) * to **setup your kiwi account** 
 and **get added to the docker group**. 
 
 
