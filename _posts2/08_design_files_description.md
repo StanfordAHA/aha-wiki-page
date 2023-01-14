@@ -15,6 +15,17 @@ The design.place contains the name of the tile, X,Y location and tile id (used i
 
 -design.route
 
+The design.route contains the route for each edge. 
+For edges from a switchbox (SB): (track, x, y, direction, is_out, bit_width).
+
+(Direction)
+       3
+      ---
+    2 | | 0
+      ---
+       1
+   
+
 -design.packed
 
 The design.packed has every edge in the application graph from point to point (tile id, port).
