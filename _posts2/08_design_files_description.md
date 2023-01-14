@@ -11,6 +11,8 @@ layout: post
 Describe each of
 -Design.place
 
+The design.place contains the name of the tile, X,Y location and tile id (used in io_placement.py, etc.).
+
 -Design.route
 
 -Design.packed
