@@ -19,10 +19,15 @@ The design.route contains the route for each edge.
 For edges from a switchbox (SB): (track, x, y, direction, is_out, bit_width).
 
 (Direction)
+
        3
+       
       ---
+      
     2 | | 0
+    
       ---
+      
        1
    
 
