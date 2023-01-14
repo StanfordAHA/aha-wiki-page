@@ -6,7 +6,8 @@ layout: post
 ---
 
 This is a link to a good book which provide a very clear explanation for the concept and algorithms about different stages in PnR. 
-[VLSI Physical Design: From Graph Partitioning to Timing Closure] (https://link.springer.com/book/10.1007/978-90-481-9591-6)
+
+[VLSI Physical Design: From Graph Partitioning to Timing Closure](https://link.springer.com/book/10.1007/978-90-481-9591-6)
 
 ### Current issues could be work on
 
