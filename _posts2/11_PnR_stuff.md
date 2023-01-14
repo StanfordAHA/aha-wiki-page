@@ -51,14 +51,14 @@ Under thunder, `example/placer.cc` is the top module. `placer.cc` would be make 
 
 Inside `Garnet.py`, it would call 
 
-   placement, routing, id_to_name = archipelago.pnr(self.interconnect, (netlist, bus),
-                                                   load_only=load_only,
-                                                   cwd=app_dir,
-                                                   id_to_name=id_to_name,
-                                                   fixed_pos=fixed_io,
-                                                   compact=compact,
-                                                   harden_flush=self.harden_flush,
-                                                   pipeline_config_interval=self.pipeline_config_interval)
+   	placement, routing, id_to_name = archipelago.pnr(self.interconnect, (netlist, bus),
+                                                   	load_only=load_only,
+                                                   	cwd=app_dir,
+                                                   	id_to_name=id_to_name,
+                                                   	fixed_pos=fixed_io,
+                                                   	compact=compact,
+                                                   	harden_flush=self.harden_flush,
+                                                   	pipeline_config_interval=self.pipeline_config_interval)
 
 
 
