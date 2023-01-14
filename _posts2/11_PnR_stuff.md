@@ -212,9 +212,27 @@ Detailed placement **refines individual locations** by local optimization while 
 | Netlist     | <net id, blk ids> = <str, str vector> | e10 = (m10, r8, p55) |
 | Cluster     | <cluster id, blk ids> = <int, str set>  | x6: (p17, p18, p21, r16, r19) |
 | Position    | <blk id, coordinate> = <str, int pair>  | I0 = (3 0) |
-| GP_result   | <blk type, coordinates> = <str, int set>  | m = (3 1), (3 3), (4 2), (7 7), ...   |
+| GP_result   | <blk type, coordinates> = <str, int set>  | m : (3 1), (3 3), (4 2), (7 7), ...   |
 | DP_result   | <blk id, coordinate> = <str, int set>   | m10 = (19 8) |
 
+
+## Recompile
+
+After making some change under `thunder` or `cyclone`, we need to recompile to make a new executable. 
+
+Under `/aha/cgra_pnr`:
+   
+      $ ./install.sh
+      $ pip uninstall pycyclone -y && pip uninstall pythunder -y
+      $ pip install -e thunder && pip install -e cyclone
+
+Then we can run the below script to test **only** the placer:
+
+      #!/bin/bash
+      APP=gaussian
+      APP_PATH=/aha/Halide-to-Hardware/apps/hardware_benchmarks/apps/$APP/bin
+      PLACER=/aha/cgra_pnr/thunder/build/example/placer
+      $PLACER $APP_PATH/design.layout $APP_PATH/design.packed $APP_PATH/design.place
 
 
 
