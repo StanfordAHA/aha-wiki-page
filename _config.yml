@@ -1,6 +1,5 @@
 title: AHA wiki page
 remote_theme: sighingnow/jekyll-gitbook
-baseurl: /aha-wiki-page
 toc:
   enabled: true
   h_min: 1
