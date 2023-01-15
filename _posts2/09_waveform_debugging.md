@@ -23,4 +23,4 @@ Navigate to /top/dut/global_buffer_W_inst0/global_buffer and select input/output
 
 **strm_g2f** and **strm_f2g** signals include data between glb and cgra, interrupt pulses, and flush
 
-![](/aha-wiki-page/assets/glb_waveform.png)
+![GLB Waveform](/assets/glb_waveform.png)
