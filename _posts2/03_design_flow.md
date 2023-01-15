@@ -79,8 +79,8 @@ The placement file would be saved in `./bin/design.place`. We can see the x and 
 ### Testing 
 Then we can run glb test, if the thing goes well, it should show `glb mapping success` as well as the simulation time, cpu time and the data structure size. 
 
-    module load base incisive xcelium vcs verdi
-    aha glb apps/gaussian
+    module load base vcs verdi
+    aha glb apps/gaussian (optionally use --waveform to dump fsdb)
 
 
 To generate the log file about critical path, we can use `aha sta` command. The log file would be saved at `/aha/Halide-to-Hardware/apps/hardware_benchmarks/apps/gaussian/log/aha_sta.log`.
