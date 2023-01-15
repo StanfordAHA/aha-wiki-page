@@ -7,11 +7,11 @@ layout: post
 
 Waveform Debugging Tips
 
--Pe tile important signals
+### Pe tile important signals
 
--Mem tile important signals
+### MEM tile important signals
 
--GLB tile important signals
+### GLB important signals
 
 Navigate to /top/dut/global_buffer_W_inst0/global_buffer and select input/output siganls only
 
