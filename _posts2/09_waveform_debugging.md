@@ -7,7 +7,7 @@ layout: post
 
 Waveform Debugging Tips
 
-### Pe tile important signals
+### PE tile important signals
 
 ### MEM tile important signals
 
