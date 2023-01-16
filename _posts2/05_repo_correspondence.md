@@ -1,5 +1,5 @@
 ---
-title: Github repo Correspondence
+title: AHA Commands
 author: XXX
 date: 2022-09-24
 layout: post
@@ -28,14 +28,14 @@ Lake modules in under `/aha/lake/lake/modules/` folder. MEM tile is specified in
 
 
 ### Halide
-The `aha halide` command specified in `/aha/aha/util/halide.py`. It would find appications under `Halide-to-Hardware/apps/hardware_benchmarks/apps/` and store the map result under `./bin/map_result/` folder in the application folder. 
+The `aha halide` command is specified in `/aha/aha/util/halide.py`. It would find appications under `Halide-to-Hardware/apps/hardware_benchmarks/apps/` and store the map result under `./bin/map_result/` folder in the application folder. 
 
 
 ### Pipeline
 TBD
 
 ### Glb
-TBD
+The `aha glb` command specified in `/aha/aha/util/glb.py` runs a SystemVerilog VCS simulation of a kernel. This simulates data movement into the CGRA, kernel processing, and gold checking. It has the optional `--waveform` flag to dump an fsdb. 
 
 ### Sta
 The `aha sta` command specified in `aha/aha/util/sta.py` would call `/aha/archipelago/visualize.py`. This command is used to generate log file and visualization of the final CGRA. 
