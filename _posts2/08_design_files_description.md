@@ -11,10 +11,14 @@ The design.place contains the name of the tile, X,Y location and tile id (used i
 
 ### design.route
 
-The design.route contains the route for each edge. 
-For edges from a switchbox (SB): (track, x, y, direction, is_out, bit_width).
+The design.route contains the route for each edge. First we have the Net ID, then each net is composed of segments (# is "Segment Size"). Then each segment is described. 
 
-(Direction)
+SB: (track, x, y, side, input/output, bit_width)
+PORT: port_name (x, y, bit_width]
+REG:  reg_name (track, x, y, bit_width) (reg_name is track and direction)
+RMUX: rmux_name (x, y, bit_width) (rmux name is track and direction)
+
+(Side)
 
        3
        
@@ -26,6 +30,8 @@ For edges from a switchbox (SB): (track, x, y, direction, is_out, bit_width).
       
        1
    
+   
+Source (https://github.com/Kuree/cgra_pnr/blob/master/cyclone/src/graph.cc#L109-L139)
 
 ### design.packed
 
