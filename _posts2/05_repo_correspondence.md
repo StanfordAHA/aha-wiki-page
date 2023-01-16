@@ -23,9 +23,6 @@ See [Design Flow](03_design_flow.md) doc. Four commonly used commands are `aha g
 The `aha garnet` command specified in `/aha/aha/util/garnet.py` would call `/aha/garnet/garnet.py`. This command is used to implement the CGRA using our generator infrastructure and generate the verilog code. 
 The main function is called `create_cgra()` specified in `/aha/garnet/cgra/util.py`. The file import modules from Peak, Lake and Canal.
 
-#### Lake
-Lake modules in under `/aha/lake/lake/modules/` folder. MEM tile is specified in `./strg_ub_vec.py`. ID is in `./for_loop.py`, AG is in `./addr_gen.py`, and SG is in `./spec/sched_gen.py`.
-
 
 ### Halide
 The `aha halide` command is specified in `/aha/aha/util/halide.py`. It would find appications under `Halide-to-Hardware/apps/hardware_benchmarks/apps/` and store the map result under `./bin/map_result/` folder in the application folder. 
