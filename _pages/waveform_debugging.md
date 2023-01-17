@@ -1,7 +1,7 @@
 ---
 title: Waveform Debugging Tips
 author: XXX
-date: 2022-09-09
+date: 09
 layout: post
 ---
 
