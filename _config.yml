@@ -12,12 +12,12 @@ collections:
     output: true
     permalink: /:collection/:title
     order:
-      - design_flow.md
-      - lake.md
       - aha_commands.md
-      - lake_waveform.md
-      - lake_repo.md
-      - design_files.md
-      - waveform_debugging.md
+      - h2h_files.md
+      - design_flow.md
       - design_files.md
       - pnr.md
+      - lake.md
+      - lake_repo.md
+      - waveform_debugging.md
+      - lake_waveform.md
