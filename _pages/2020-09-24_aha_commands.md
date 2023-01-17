@@ -1,7 +1,7 @@
 ---
 title: AHA Commands
 author: XXX
-date: 2022-09-24
+date: 10
 layout: post
 ---
 
