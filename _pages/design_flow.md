@@ -1,7 +1,7 @@
 ---
 title: CGRA Design Flow
 author: XXX
-date: 01
+date: 02
 layout: post
 ---
 
