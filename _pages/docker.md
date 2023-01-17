@@ -1,7 +1,7 @@
 ---
 title: Docker Setup
 author: XXX
-date: 2022-09-22
+date: 01
 layout: post
 ---
 
