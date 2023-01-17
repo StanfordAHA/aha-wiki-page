@@ -1,7 +1,7 @@
 ---
 title: PnR stuff
 author: XXX
-date: 2023-01-12
+date: 07
 layout: post
 ---
 
