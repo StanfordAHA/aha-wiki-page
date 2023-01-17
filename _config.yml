@@ -5,10 +5,7 @@ toc:
   h_min: 1
   h_max: 3
 collections:
-  posts1:
-    output: true
-    permalink: /:collection/:title
-  posts2:
+  posts:
     output: true
     permalink: /:collection/:title
     order:
