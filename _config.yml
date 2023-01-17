@@ -10,8 +10,8 @@ collections:
     permalink: /:collection/:title
     
     order:
-      - aha_commands.md
-      - h2h_files.md
+      - aha_commands
+      - h2h_files
       - design_flow.md
       - design_files.md
       - pnr.md
