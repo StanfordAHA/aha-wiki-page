@@ -8,6 +8,7 @@ collections:
   pages:
     output: true
     permalink: /:collection/:title
+    
     order:
       - aha_commands.md
       - h2h_files.md
