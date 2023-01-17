@@ -11,3 +11,13 @@ collections:
   posts2:
     output: true
     permalink: /:collection/:title
+    order:
+      - design_flow.md
+      - lake.md
+      - aha_commands.md
+      - lake_waveform.md
+      - lake_repo.md
+      - design_files.md
+      - waveform_debugging.md
+      - design_files.md
+      - pnr.md
