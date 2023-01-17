@@ -7,15 +7,6 @@ toc:
 collections:
   pages:
     output: true
-    permalink: /:collection/:title
+    permalink: /:collection/:path
     
-    order:
-      - aha_commands
-      - h2h_files
-      - design_flow.md
-      - design_files.md
-      - pnr.md
-      - lake.md
-      - lake_repo.md
-      - waveform_debugging.md
-      - lake_waveform.md
+
