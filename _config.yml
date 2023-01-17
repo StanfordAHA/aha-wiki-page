@@ -3,7 +3,7 @@ remote_theme: sighingnow/jekyll-gitbook
 toc:
   enabled: true
   h_min: 1
-  h_max: 2
+  h_max: 1
 collections:
   pages:
     output: true
