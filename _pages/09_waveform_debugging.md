@@ -1,7 +1,7 @@
 ---
 title: Waveform Debugging Tips
 author: XXX
-date: 09
+date: 2022-01-09 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
