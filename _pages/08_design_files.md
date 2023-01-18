@@ -1,7 +1,7 @@
 ---
 title: Design files
 author: XXX
-date: 08
+date: date: 2022-01-08 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
