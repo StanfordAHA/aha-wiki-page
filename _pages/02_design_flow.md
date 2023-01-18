@@ -1,7 +1,7 @@
 ---
 title: CGRA Design Flow
 author: XXX
-date: 02
+date: 2022-01-02 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
