@@ -1,7 +1,7 @@
 ---
 title: Docker Setup
 author: XXX
-date: 01
+date: 2022-01-01 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
