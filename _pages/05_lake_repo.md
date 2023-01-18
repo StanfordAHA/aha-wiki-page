@@ -1,7 +1,7 @@
 ---
 title: Lake repo explain
 author: XXX
-date: 05
+date: 2022-01-05 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
