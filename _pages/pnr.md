@@ -1,7 +1,7 @@
 ---
 title: PnR stuff
 author: XXX
-date: 07
+date: 7
 layout: post
 ---
 
