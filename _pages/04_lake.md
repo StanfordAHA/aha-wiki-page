@@ -1,7 +1,7 @@
 ---
 title: Mem tile
 author: XXX
-date: 04
+date: 2022-01-04 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
