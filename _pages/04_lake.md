@@ -5,7 +5,7 @@ date: 2022-01-04 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
-![Image](/assets/aha_wiki_page/mem_tile.PNG)
+![MEM Tile](/aha-wiki-page/assets/mem_tile.PNG)
 
 Figure above is the block diagram of a MEM tile. In order to implement a **multi-ported** memory with a **single-ported** memory, we use four 
 small register files with a large single-port SRAM. The register files serve as SIPO interfaces (AGGs) between input ports and SRAM, as well as PISO interfaces (TBs) between SRAM and output ports. All of them (AGG, TB and SRAM) use *unified buffer abstraction*. 
