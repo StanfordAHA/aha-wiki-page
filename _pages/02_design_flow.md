@@ -5,24 +5,18 @@ date: 2022-01-02 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
-In order to update the design, we need to update **both the CGRA-based hardware accelerator and the compiler**. The main feature of AHA project is the **co-design** of accelerators and compilers, where the compiler updates automatically as the accelerator evolves.
+Our CGRA design flow generates **both the CGRA-based hardware accelerator and the application compiler**. The main feature of AHA project is the **co-design** of accelerators and compilers, where the compiler updates automatically as the accelerator evolves.
 
 
 Accelerator
 -------------
-CGRAs consist of three types of modules: **PEs**, **memories**, and **interconnect**. Accordingly, three high-level **domain-specific hardware specification languages (DSLs)** is used to represent formal specification for each component. Each DSL would be used to generate both the RTL code for accelerators and the collateral rewrite rules for compilers.
-
+CGRAs generally consist of: **PEs**, **memories**, and an **interconnect**. Accordingly, three high-level **domain-specific hardware specification languages (DSLs)** are used to specify each component. Each DSL is used to generate both the RTL code for the CGRA and the collateral for generating the new compilers.
+The three DSLs we use are:
 - PEak for PEs
 - Lake for memories
 - Canal for interconnects
 
-All of these DSL programs are based on a low-level DSL called **magma** which is embedded in Python. 
-
-> ##### Note
-> 
-> In other words, we **use Python instead of verilog** to design our circuit. The process has already been packed, so we can use one command to set up all these, and generate the verilog we need.
-{: .block-tip }
-
+All of these DSL's are embedded in Python, and are based on a low-level hardware description DSL called **magma** which is also embedded in Python. 
 
 ### Usage
 Inside the Docker container, we generate **verilog of the CGRA** using the following command. The `width` and `height` flag represent **the size of the array** we want to generate. Although the size might be flexible for different applications, it's still better to generate a larger array so that we can have more tiles to use. Note that every flag needs to be included in the command.
