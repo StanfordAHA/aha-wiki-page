@@ -5,11 +5,9 @@ date: 2022-01-09 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
-Waveform Debugging Tips
+# PE tile important signals
 
-### PE tile important signals
-
-### MEM tile important signals
+# MEM tile important signals
 The memory macro is located under `/top/dut/Interconnect_inst0/Tile_X<#>_Y<#>/MemCore_inst0/MemCore_inner_W_inst0/MemCore_inner/
 `. You can monitor memory read and write requests sent from the unified buffer.
 
@@ -25,7 +23,7 @@ It further lists all the UB configuration registers (starting_addr, strides, ran
 
 
 
-### GLB important signals
+# GLB important signals
 
 Navigate to `/top/dut/global_buffer_W_inst0/global_buffer and select input/output siganls only`
 

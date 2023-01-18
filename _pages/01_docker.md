@@ -5,7 +5,7 @@ date: 2022-01-01 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
-## Get Started 
+# Get Started 
 Since there can be many different environments we need to 
 setup for development in the AHA project, we use 
 **Docker** to make thing easier.
@@ -29,11 +29,11 @@ and **get added to the docker group**.
 {: .block-warning }
 
 
-## Using docker
+# Using docker
 Here is a brief overview of **Docker Images** and **Docker Container**.
 
 
-### Docker Image
+## Docker Image
 A *image* is a **read-only blueprint** of our application which 
 **form the basis of containers**. Often, an image is based on another 
 image, with some additional customization. 
@@ -49,7 +49,7 @@ can use `docker pull` command to pull docker image from docker hub.
     docker pull stanfordaha/garnet:latest
 
 
-### Docker Container
+## Docker Container
 Since *images* are just templates, you cannot start or run them. We 
 could create a *container* from *image* and run the actual application. 
 In other words, **a container is a runnable instance of an image**, 
@@ -59,7 +59,7 @@ You can create, start, stop, move, or delete a container using the Docker
 API or CLI.
 
 
-#### List containers
+### List containers
 
     docker ps
     docker container ls
@@ -68,7 +68,7 @@ We can use `docker ps` command to show all containers that are currently
 running, which is exactly the same function as `docker container ls`.  
 
 
-#### Create containers
+### Create containers
 
 And we can use `docker run` to create a container based on specific image. 
 The `-it` flag specifies an interactive terminal which makes it easier to 
@@ -85,7 +85,7 @@ After running above command, the new container must appear on the list if
 we call `docker ps` again. 
 
 
-#### Attach, Detach container
+### Attach, Detach container
 
 To attach to Docker container after we create it, we use `docker attach` command.
 
@@ -103,7 +103,7 @@ mode, we can use `docker stop` command to stop a running container.
     docker stop <container-name>
 
 
-## Update Docker
+# Updating Tools Within Docker
 To get everything up to date, it is better to run `apt update`. Since `vim` is 
 not installed in the docker yet, we can install vim to make things easier. 
 
@@ -112,14 +112,14 @@ not installed in the docker yet, we can install vim to make things easier.
 
 
 
-### Other Useful Stuff
+# Other Useful Stuff
 To check the history commands:
 
     history
     git log --graph --oneline --all
 
 
-## Get the latest version
+# Get the latest version
 Best way to get the latest version is to create a new docker. To update an existing docker use:
 
     git submodule update --init --recursive
@@ -128,7 +128,7 @@ Best way to get the latest version is to create a new docker. To update an exist
 
 
 
-## Reference
+# Reference
 
 [1] [https://docker-curriculum.com/](https://docker-curriculum.com/)
 

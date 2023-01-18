@@ -7,7 +7,7 @@ layout: post
 
 From [Github repo Correspondence](05_repo_correspondence.md), MEM tile is specified in [`./strg_ub_vec.py`](https://github.com/StanfordAHA/lake/blob/f7f2b501e91ac4764e0f94a9247079adf0eb3d99/lake/modules/strg_ub_vec.py). And Lake architecture overview is explained [here](04_Lake.md). When looking into .py file, we can see lots of module names, so let's try to link those together. 
 
-## LakeTop
+# LakeTop
 
     mode: "UB"
     self.read_delay = 1 
@@ -22,7 +22,7 @@ From [Github repo Correspondence](05_repo_correspondence.md), MEM tile is specif
     output output_width_1_num_2            => stencil_valid
 
 
-## StrgUBVec
+# StrgUBVec
 
     
     input  [15:0] chain_data_in_f_0, chain_data_in_f_1
@@ -43,7 +43,7 @@ Each MEM tile contains two AGGs, one SRAM and two TBs. We devide them into five 
     +-- StrgUBTBOnly
 
 
-### StrgUBAggOnly
+## StrgUBAggOnly
 
     StrgUBVec
     +-- StrgUBAggOnly
@@ -63,7 +63,7 @@ AGG is SIPO interface, so the input would be **one 16-bit data word** for each p
 The **ID module** is specified in [`./for_loop.py`](https://github.com/StanfordAHA/lake/blob/f7f2b501e91ac4764e0f94a9247079adf0eb3d99/lake/modules/for_loop.py), **AG** is in [`./addr_gen.py`](https://github.com/StanfordAHA/lake/blob/f7f2b501e91ac4764e0f94a9247079adf0eb3d99/lake/modules/addr_gen.py), and **SG** is in [`./spec/sched_gen.py`](https://github.com/StanfordAHA/lake/blob/f7f2b501e91ac4764e0f94a9247079adf0eb3d99/lake/modules/spec/sched_gen.py).
 
 
-#### AG
+### AG
 AG generate **the READ/WRITE address**. For example, AG under `AggOnly` would calculate which address in AGG to be READ/WRITE. Since AGG is a small memory of size 2*4 data-words, we need 3 bits for its WRITE address (capability: 8 data-words), 1 bit for its READ address (capability: 2 pairs of 4-data-word). But if the AG is used for SRAM, which can store 512 pairs of 4-data-word, it would need 9 bits for both its WRITE/READ address. 
 
 We utilize the recurrence relation of ID and **replace multipliers by an adder, a register, and a multiplexer**. AG gets the input `mux_sel` signal from ID, deciding which stride to take to increment the running address. Lake supports up to **6-D loop nest**, so we would need 3 bits for the MUX and we would have 6 stride choices to choose from.
@@ -74,7 +74,7 @@ We utilize the recurrence relation of ID and **replace multipliers by an adder, 
     output [8:0] addr_out
 
 
-#### SG
+### SG
 SG generate **the READ/WRITE enable signal** under the control of ID. SG would use the same AG architecture to calculate **the next cycle schedule**. SG would also gets `cycle_count` input from ID, recording **the current cycle number**. It can then compare the next cycle schedule with the current cycle number, and **generate enable signal (`valid_output`)** when the two results match.  
 
     input  [15:0] cycle_count
@@ -84,7 +84,7 @@ SG generate **the READ/WRITE enable signal** under the control of ID. SG would u
     output valid_output
 
 
-#### ID
+### ID
 ID corresponds to **for-loop**. It would output the **`mux_sel` signal** needed by AG and SG. The `ranges` is the **boundary of each loop**, corresponding to **`extent` attribute** in config file. 
 
     input  [5:0] [9:0] ranges
@@ -98,7 +98,7 @@ ID corresponds to **for-loop**. It would output the **`mux_sel` signal** needed 
 {: .block-tip }
 
 
-### StrgUBAggSRAMShared
+## StrgUBAggSRAMShared
 
     StrgUBVec
     +-- StrgUBAggSRAMShared
@@ -113,7 +113,7 @@ The `agg_read_out` signal is the WRITE enable signal from SRAM, and the `agg_sra
     output [1:0] [8:0] agg_sram_shared_addr_out
 
 
-#### AggSramSharedSchedGen
+### AggSramSharedSchedGen
 Now SG is optimize to **4-to-1**, in other words, it **collects 4 data-words than pass READ enable signal to SRAM**. But what if the range is not multiplicant of 4? 
 
 For example, in `resnet_tiny.json`, the range (the `extent` flag) is 14 now. AGG starts collecting data-word from cycle 0, SG would send out READ enable signal after collecting 4 data-words (`cycle_stride[0] = 4`) on cycle 4 (pass data from cycle 0,1,2,3), 8 (pass data from cycle 4,5,6,7), 12 (pass data from cycle 8,9,10,11). But the data-words collected at cycle 12 and cycle 13 are writen in AGG but haven't pass to SRAM yet. So we would specify `agg_read_padding` flag for `AggSramSharedSchedGen` to start counting at cycle 13 and generate the READ enable signal at cycle 16 (pass data from cycle 12,13). 
@@ -134,7 +134,7 @@ In the mean time, data-words still coming in for the second loop start with cycl
         ...
 
 
-### StrgUBSRAMOnly
+## StrgUBSRAMOnly
 
     StrgUBVec
     +-- StrgUBSRAMOnly
@@ -146,7 +146,7 @@ In the mean time, data-words still coming in for the second loop start with cycl
     output [1:0] [8:0] sram_read_addr_out,
 
 
-### StrgUBSRAMTBShared
+## StrgUBSRAMTBShared
 
     StrgUBVec
     +-- StrgUBSRAMTBShared
@@ -159,7 +159,7 @@ In the mean time, data-words still coming in for the second loop start with cycl
     output [1:0] [2:0] loops_sram2tb_mux_sel
 
 
-### StrgUBTBOnly
+## StrgUBTBOnly
 
     StrgUBVec
     +-- StrgUBTBOnly

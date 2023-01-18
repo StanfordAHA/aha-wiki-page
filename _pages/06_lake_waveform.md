@@ -12,7 +12,7 @@ The waveform contains three types of task using the same MEM tile architecture. 
     +-- hw_input_global_wrapper_stencil
     +-- hw_kernel_global_wrapper_stencil
 
-## Kernel Stencil
+# Kernel Stencil
 
     hw_kernel_global_wrapper_stencil
     +-- ub_hw_kernel_global_wrapper_stencil_BANK_0
