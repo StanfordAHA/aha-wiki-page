@@ -1,7 +1,7 @@
 ---
 title: Lake waveform
 author: XXX
-date: 06
+date: 2022-01-06 (Date used for order should be 2022-01-XX.)
 layout: post
 ---
 
