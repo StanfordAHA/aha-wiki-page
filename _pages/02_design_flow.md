@@ -59,3 +59,12 @@ You can optionally generate an fsdb waveform using the `--waveform` flag. This w
 To run your mapped application through a critical path timing model, we can use `aha sta apps/gaussian`. The maximum frequency that you will be able to run the CGRA array at when running the application will be printed.
 
 The `aha sta` command can also be used to generate a visualization of the critical path of the application using the `--visualize or -v` flag. It will produce `./bin/pnr_result_{width}.png`. See `aha/aha/util/sta.py` for more details. 
+
+## aha regress
+When testing architectural or compiler changes, its often useful to automate the compilation and testing of many applications. `aha regress` is the command that we use for this purpose. In this step, it will iterate through a list of applications and run `aha map`, `aha pnr`, and `aha test`. There are many regression application suites, each with different uses. 
+
+`aha regress fast` will run the smallest sparse and smallest dense image processing application and is intended to run in minutes.
+`aha regress daily` tests more complex applications including gaussian, harris, camera pipeline, unsharp, and resnet. It generally takes hours.
+`aha regress full` tests every application and takes several hours to complete.
+
+To see a list of all regress suites and the applications they include, see `aha/util/regress.py`.
