@@ -20,77 +20,42 @@ All of these DSL's are embedded in Python, and are based on a low-level hardware
 ## Usage
 Inside the Docker container, we generate **verilog of the CGRA** using the following command. The `width` and `height` flag represent **the size of the array** we want to generate. Although the size might be flexible for different applications, it's still better to generate a larger array so that we can have more tiles to use. Note that every flag needs to be included in the command.
 
-    aha garnet --width 32 --height 16 --verilog --use_sim_sram --rv --sparse-cgra --sparse-cgra-combined
+    aha garnet --width 32 --height 16 --verilog --use_sim_sram
     
-    for test:
-        aha garnet --width 32 --height 16 --verilog --rv --sparse-cgra --sparse-cgra-combined
+When generating the verilog for physical design, remove the `--use_sim_sram` flag
 
-After running the command, it would save verilog file in `/aha/garnet/garnet.v`.
+After running the command, it would create the verilog file `/aha/garnet/garnet.v`.
 
 
 # Compiler
-Since now we have everything prepared, we want to use the compiler to **lower an application onto the CGRA hardware**.
+We will now go through the steps to compile an application onto the CGRA hardware and simulate it.
 
 In most of the experiments, we target applications in **dense linear algebra applications** domain. 
 
-> ##### Note
-> 
-> Comparing to FPGA which are designed to handle applications in several different domains, 
-> CGRA can target to accelerate only one domain of applications.
-{: .block-tip }
+The application is written in high-level DSL called **Halide**, which is embedded in C++. The Halide application would go through a several stages before we can simulate it.
 
-The application is written in high-level DSL called **Halide**, which is embedded in C++. The Halide application would go through the scheduling phase and output a dataflow graph of logical operations in CoreIR format.
+We will use Gaussian as an example to go through the three steps of the compiler: map, pnr, and test.
 
+## aha map 
+`aha map apps/gaussian` will first compile the halide application using the Halide to Hardware compiler. It takes in the gaussian_generator.cpp and process.cpp described in https://stanfordaha.github.io/aha-wiki-page/pages/03_h2h_files/. 
 
-## Usage 
-Inside the Docker container, we use Gaussian application as example. 
+Next, `aha map` will use a tool called MetaMapper to map the compute of the application (described in the CoreIR file `bin/gaussian_compute.json`) to PEs. It will produce a CoreIR file called `bin/gaussian_compute_mapped.json`.
 
-In `/aha/aha/util/regress.py` we can see there are different setting suggestion for different applications. For example, the suggested `HALIDE_GEN_ARGS` is `"mywidth=62 myunroll=2 schedule=3"` for gaussian application. We need to **set HALIDE_GEN_ARGS before compiling the apps**. 
+Finally, it will use the clockwork tool to schedule the application and map the storage and buffers of the application to memory tiles. This step takes in  `bin/gaussian_compute_mapped.json` and `bin/gaussian_memory.cpp` and produces a CoreIR file called `bin/design_top.json` (described in detail here: https://stanfordaha.github.io/aha-wiki-page/pages/08_design_files/).
 
-    cd /aha/Halide-to-Hardware/apps/hardware_benchmarks/apps/gaussian
-    export HALIDE_GEN_ARGS="mywidth=62 myunroll=2 schedule=3" 
-    aha halide apps/gaussian
+## aha pnr 
+Now we have both verilog file and fully mapped CoreIR file. The `aha pnr apps/gaussian --width 32 --height 16` command will now place and route the application, perform pipelining, and generate a bitstream used to configure the CGRA to execute your application. 
 
-After running the command, it would save CoreIR file in `./bin/design_top.json`. 
+The `width` and `height` flag specify what portion of the array we like to map to. This can only be as large as the verilog that you generated using `aha garnet` but may be smaller if desired.
 
+After running the command, the bitstream file would be saved in `./bin/gaussian.bs`. Additionally, several design files (described here: https://stanfordaha.github.io/aha-wiki-page/pages/08_design_files/) will be generated as well.
 
-## Mapping 
-Now we have both verilog file and CoreIR file. Then the CoreIR graph would be mapped, placed, and routed onto physical hardware units to produce CGRA bitstream. The CGRA bitstream acts just the same as FPGA bitstream, which contains configuration data and can be used to load the design onto the hardware.
+## aha test 
+Then we can run `aha test apps/gaussian`, which will run a VCS functional simulation of your application running on your CGRA verilog. On the kiwi server, use `module load base vcs` to load vcs before running `aha test`.
 
-We can use the following command to map the CoreIR graph onto the CGRA. The `width` and `height` flag specify what portion of the array we like to map to. The size must be smaller than the original setting of the CGRA verilog. We need to **set DISABLE_GP before compiling the apps**.
+You can optionally generate an fsdb waveform using the `--waveform` flag. This will require Verdi to be loaded: `module load verdi`. 
 
-    export PIPELINED=1   // we can still map without this variable. But the frequency would be very low.
-    export DISABLE_GP=1
-    aha pipeline apps/gaussian --width 32 --height 16 --input-broadcast-branch-factor 2 --input-broadcast-max-leaves 32 --rv --sparse-cgra --sparse-cgra-combined
+## aha sta
+To run your mapped application through a critical path timing model, we can use `aha sta apps/gaussian`. The maximum frequency that you will be able to run the CGRA array at when running the application will be printed.
 
-After running the command, the bitstream file would be saved in `./bin/gaussian.bs`. 
-
-The placement file would be saved in `./bin/design.place`. We can see the x and y coordinates and the functions of each tile. The connection edges among each tile for the application is in `./bin/design.packed`. And `./bin/design.route` would show the actual track and `./bin/design.freq` wold show the frequency in MHz unit.
-
-
-## Testing 
-Then we can run glb test, if the thing goes well, it should show `glb mapping success` as well as the simulation time, cpu time and the data structure size. 
-
-    module load base vcs verdi
-    aha glb apps/gaussian (optionally use --waveform to dump fsdb)
-
-
-To generate the log file about critical path, we can use `aha sta` command. The log file would be saved at `/aha/Halide-to-Hardware/apps/hardware_benchmarks/apps/gaussian/log/aha_sta.log`.
-
-    aha sta apps/<app name> --log
-
-
-## Visualization
-The `aha sta` command would call `/aha/archipelago/visualize.py`. It would produce `./bin/pnr_result_{width}.png` for visualization. See `aha/aha/util/sta.py` for more details. 
-
-    python3 -m pip install --upgrade pip
-    python3 -m pip install --upgrade Pillow
-    aha sta apps/<app name> --visualize
-
-
-
-
-
-
-
-
+The `aha sta` command can also be used to generate a visualization of the critical path of the application using the `--visualize or -v` flag. It will produce `./bin/pnr_result_{width}.png`. See `aha/aha/util/sta.py` for more details. 
