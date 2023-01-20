@@ -13,8 +13,8 @@ for their new work.
 
 Steps look like below for work that changes garnet and metamapper:
 
-1. Finish changes in garnet and push to branch garnet_feature_X. Start PR for garnet master.
-2. Finish changes in metamapper and push to branch metamapper_feature_X. Start PR for metamapper master. 
+1. Finish changes in garnet and push to branch `garnet_feature_X`. Start PR for garnet master.
+2. Finish changes in metamapper and push to branch `metamapper_feature_X`. Start PR for metamapper master. 
 3. Wait for garnet and metamapper to PRs to merge to their respective masters.
 4. Then in aha `git add garnet metamapper` and commit this to a new branch aha_feature_X, start a PR here as well.
 5. Once this PR has been approved and passes CI (https://buildkite.com/stanford-aha/aha-flow) you can merge it into aha master!
