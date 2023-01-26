@@ -1,5 +1,5 @@
 ---
-title: PnR stuff
+title: PnR
 author: XXX
 date: 2022-01-07 (Date used for order should be 2022-01-XX.)
 layout: post
