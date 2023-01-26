@@ -68,3 +68,21 @@ When testing architectural or compiler changes, its often useful to automate the
 `aha regress full` tests every application and takes several hours to complete.
 
 To see a list of all regress suites and the applications they include, see `aha/util/regress.py`.
+
+## Environmental Variables
+To modify the compilation, scheduling, place-and-route, and pipelining of our applications, we use environmental variables. Here is a brief description of the important variables that we use:
+
+`HALIDE_GEN_ARGS` determines scheduling parameters used in the `{app}_generator.cpp` described here: https://stanfordaha.github.io/aha-wiki-page/pages/03_h2h_files. A valid assignment to this variable is a space separated list of `GeneratorParam` listed at the top of `{app}_generator.cpp`. For example if you want to run gaussian you could set `HALIDE_GEN_ARGS="mywidth=62 myunroll=2 schedule=3`.
+`PIPELINED` determines whether or not compute pipelining is turned on. Valid values are `PIPELINED=1` (default) compute pipelining turned on or `PIPELINED=0` compute pipelining turned off
+`DISABLE_GP` determines whether or not the global placement stage of place-and-route is done. `DISABLE_GP=1` (default) turns off global placement, `DISABLE_GP=0` turns on global placement
+`HL_TARGET` has two valid values `HL_TARGET=host-x86-64` or `HL_TARGET=host-x86-64-enable_ponds`. Use `HL_TARGET=host-x86-64-enable_ponds` do enable the memory mapper to use the register files (ponds) present in our PE tiles. By default, this is set to `HL_TARGET=host-x86-64` for image processing applications and `HL_TARGET=host-x86-64-enable_ponds` for machine learning applications.
+`PNR_PLACER_EXP` is a tuning knob for the placement stage of place-and-route. Generally, a higher value results in an application placement and routing that has a shorter critical path and may reduce the runtime of applications running on the array. By default, this variable is not set, and the place-and-route tool will choose the first value that routes successfully. 
+`SWEEP_PNR_PLACER_EXP` will tell the place-and-route tool to try every value of `PNR_PLACER_EXP` from 1 to 30 and choose the result with the shortest critical path. By default it is not set.
+
+To avoid needing to set each of these environmental variables each time we run an application, we have included default values in `aha/util/application_parameters.json`. If you run any AHA flow command, it will use the `default` entry in the json file for the application you are compiling. If you would like to run the fastest (shortest critical path) version of the application you can run:
+`aha halide apps/gaussian --env-parameters fastest`
+
+Some machine learning applications, including ResNet, have significantly different schedules depending on the layer in the network. In the AHA flow, we use one application with different environmental parameters to choose which layer and which schedule to use. Default parameters for each layer are saved in `aha/util/application_parameters.json` and can be selected using the `--layer` flag. For example:
+
+`aha map apps/resnet_output_stationary --layer conv1`
+`aha pnr apps/resnet_output_stationary --width 32 --height 16 --layer conv1`
