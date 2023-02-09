@@ -53,7 +53,7 @@ After running the command, the bitstream file would be saved in `./bin/gaussian.
 ## aha test 
 Then we can run `aha test apps/gaussian`, which will run a VCS functional simulation of your application running on your CGRA verilog. On the kiwi server, use `module load base vcs` to load vcs before running `aha test`.
 
-You can optionally generate an fsdb waveform using the `--waveform` flag. This will require Verdi to be loaded: `module load verdi`. 
+You can optionally generate an fsdb waveform using the `--waveform` flag. This will require Verdi to be loaded: `module load verdi`. The waveform will be called `cgra.fsdb` and will be in `/aha/garnet/tests/test_app`.
 
 ## aha sta
 To run your mapped application through a critical path timing model, we can use `aha sta apps/gaussian`. The maximum frequency that you will be able to run the CGRA array at when running the application will be printed.
