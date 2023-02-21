@@ -6,6 +6,10 @@ layout: post
 ---
 
 # PE tile important signals
+Navigate to `/top/dut/Interconnect_inst0/Tile_X0A_Y03/PE_inst0/PE_inner_W_inst0/PE_inner/` (replace with PE you are intersted in)
+
+This has PE core inputs and outputs (ex. PE_input_width_17_num_0).
+
 
 # MEM tile important signals
 The memory macro is located under `/top/dut/Interconnect_inst0/Tile_X<#>_Y<#>/MemCore_inst0/MemCore_inner_W_inst0/MemCore_inner/
