@@ -6,9 +6,16 @@ layout: post
 ---
 
 # PE tile important signals
-Navigate to `/top/dut/Interconnect_inst0/Tile_X0A_Y03/PE_inst0/PE_inner_W_inst0/PE_inner/` (replace with PE you are intersted in)
+Navigate to `/top/dut/Interconnect_inst0/Tile_X00_Y01/PE_inst0/PE_inner_W_inst0/PE_inner/mem_ctrl_PE_onyx_flat/PE_onyx_inst/onyxpeintf` (replace the X and Y coordinates with PE you are interested in)
 
-This has PE core inputs and outputs (ex. PE_input_width_17_num_0).
+This PE module has the following important inputs:
+- **ASYNCRESET and CLK**
+- **inst** is the instruction to the PE. It is a concatenation of a bunch of different configuration within the PE, so it is unreadable at this level. If you want to know configurations of PE internals, look at the submodules of the PE.
+- **data0[15:0], data1[15:0], data2[15:0]** are the three 16 bit data inputs into the PE. Arithmetic operations will use these data inputs.
+- **bit0, bit1, bit2** are the three bit inputs into the PE. Bit operations will use these inputs.
+- **O0[15:0]** is the data output, usually from an aritchmetic operation.
+- **O1** is the bit output, usually from the condition code generator or the LUT.
+- **O2[15:0], O3[15:0], O4[15:0]** are the values stored in the three input registers in the PE. 
 
 
 # MEM tile important signals
