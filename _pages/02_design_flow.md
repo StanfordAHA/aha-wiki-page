@@ -20,7 +20,7 @@ All of these DSL's are embedded in Python, and are based on a low-level hardware
 ## Hardware Generation
 Inside the Docker container, we generate **verilog of the CGRA** using the following command. The `width` and `height` flag represent **the size of the array** we want to generate. Although the size might be flexible for different applications, it's still better to generate a larger array so that we can have more tiles to use. Note that every flag needs to be included in the command.
 
-    aha garnet --width 32 --height 16 --verilog --use_sim_sram
+    aha garnet --width 32 --height 16 --verilog --use_sim_sram --rv --sparse-cgra --sparse-cgra-combined
     
 When generating the verilog for physical design, remove the `--use_sim_sram` flag
 
