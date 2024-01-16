@@ -25,7 +25,7 @@ over.
 
 ## Using the Daemon
 
-When doing regressions, you can use the `aha regress --daemon auto`
+For aha regressions, you can use the `aha regress --daemon auto`
 option to tell `pnr` to use the daemon (or launch one if it does not
 yet exist).
 
@@ -35,30 +35,29 @@ auto` switch when it invokes `garnet.py`.
 
 When using the `--daemon` switch, it is important to run your job in
 the background, as the daemon is designed to remain running and
-available for future jobs. To control the running daemon, use the
+available for future jobs (see example below). To control the running daemon, use the
 various `--daemon` switches available via `garnet.py` e.g.
 ```
     aha garnet --daemon help
     aha garnet --daemon kill
 ```
 
-### Example: Regression suite using daemon
+See "options" section below and/or `aha garnet --daemon help` for more
+information about daemon options.
 
-Examples assume that you are running within your own aha- docker instance.
+### EXAMPLE: Regression suite using daemon
 ```
-$ source /aha/bin/activate
-$ aha regress pr --daemon auto
+  # Note: examples assume you are running from inside an aha docker instance
+  $ source /aha/bin/activate
+  $ aha regress pr --daemon auto
 ```
 
-### Example: Using the daemon across multiple pnr sessions
+### EXAMPLE: Using the daemon across multiple pnr sessions
 ```
   # Launch the daemon. Background it so that it will persist.
   $ aha pnr apps/pointwise --width 4 --height 2 --daemon auto &
 
-  # Wait for pnr job to complete
-  $ python garnet/garnet.py --daemon wait
-
-  # OR use the wrapper
+  # Wait for pnr job to complete (optional; can instead just watch for daemon to finish)
   $ aha garnet --daemon wait
 
   # Subsequent pnr jobs use existing daemon
@@ -68,46 +67,40 @@ $ aha regress pr --daemon auto
   $ ...
 ```
 
-### Example: App development using daemon
-
+### EXAMPLE: App development using daemon
 ( Also see [daemon-test.sh](https://github.com/StanfordAHA/garnet/blob/master/daemon/daemon-test.sh) )
-
-This example assumes that you are running within your own aha docker instance.
 ```
-$ source /aha/bin/activate
+  $ source /aha/bin/activate
 
-# --Garnet verilog build"
-$ flags1="--width  4 --height  2 --verilog --use_sim_sram --rv --sparse-cgra --sparse-cgra-combined"
-$ aha garnet $flags1
+  ### Garnet Verilog build
+  $ flags1="--width  4 --height  2 --verilog --use_sim_sram --rv --sparse-cgra --sparse-cgra-combined"
+  $ aha garnet $flags1
 
-# --Kill existing daemon if one exists
-$ aha garnet --daemon kill
+  ### Kill existing daemon if one exists
+  $ aha garnet --daemon kill
 
-# --Run first app (pointwise) and launch daemon
-# --Remember to background the daemon so that it will persist
-$ app=apps/pointwise
-$ (cd aha/Halide-to-Hardware/apps/hardware_benchmarks/$app; make clean)
-$ aha map $app --chain
-$ aha pnr $app --width 4 --height 2 --daemon auto &
-$ python garnet/garnet.py --daemon wait   # (optional)
+  ### Run first app (pointwise) and launch daemon
+  ### Remember to background the daemon so that it will persist
+  $ app=apps/pointwise
+  $ (cd aha/Halide-to-Hardware/apps/hardware_benchmarks/$app; make clean)
+  $ aha map $app --chain
+  $ aha pnr $app --width 4 --height 2 --daemon auto &
+  $ python garnet/garnet.py --daemon wait   # (optional)
 
-# --Run a second app (ushift) using the daemon
-# --No need to background pnr, it uses existing background daemon
-$ app=tests/ushift
-$ (cd aha/Halide-to-Hardware/apps/hardware_benchmarks/$app; make clean)
-$ aha map $app --chain
-$ aha pnr $app --width 4 --height 2 --daemon auto
-$ python garnet/garnet.py --daemon wait   # (optional)
+  ### Run a second app (ushift) using the daemon
+  ### No need to background pnr here, it uses existing background daemon
+  $ app=tests/ushift
+  $ (cd aha/Halide-to-Hardware/apps/hardware_benchmarks/$app; make clean)
+  $ aha map $app --chain
+  $ aha pnr $app --width 4 --height 2 --daemon auto
 ```
 
 ## Garnet daemon options
-
-You can use `--daemon help` to find the latest info about how to use the daemon.
+Use `--daemon help` to find the latest info about how to use the daemon.
 ```
-    $ aha garnet --daemon help
+$ aha garnet --daemon help
 
     DESCRIPTION:
-
       garnet.py can run as a daemon to save you time when generating
       bitstreams for multiple apps using the same garnet circuit. Use
       the "launch" command to build a circuit and keep state in the
@@ -136,7 +129,7 @@ You can use `--daemon help` to find the latest info about how to use the daemon.
     NOTE 2: cannot use the same daemon for verilog *and* pnr (not sure why).
 ```
 
-## More details, including how and why pnr uses the garnet daemon
+## Also See
 
 For more details see [Garnet daemon README](https://github.com/StanfordAHA/garnet/blob/master/daemon/README.txt)
 
