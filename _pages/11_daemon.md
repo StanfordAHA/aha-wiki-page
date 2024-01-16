@@ -6,15 +6,16 @@ layout: post
 ---
 
 
-# GARNET DAEMON
+# Garnet Daemon
 
 `garnet.py` now has a `--daemon` option, designed to improve turnaround time for garnet dense apps.
 
-Testing a dense app test requires three phases: `mapping`, `pnr`, and `testing`. The `pnr` phase works with an internal python representation of the garnet circuit. Previously, this circuit object would be rebuilt from scratch for every test, even though it is generally the same structure each time.
+Testing
+a dense app test requires three phases: `mapping`, `pnr`, and `testing`. The `pnr` phase uses an internal python representation of the garnet circuit. Previously, this circuit object would be rebuilt from scratch for every test, even though it is generally the same structure each time.
 
-The python object that represents a garnet circuit is such that it cannot be "pickled" (saved to an external file) for later reuse. So, we added the option to launch `garnet.py` as a reusable background daemon, allowing successive pnr/test invocations to reuse the same circuit over and over.
+The garnet circuit object is such that it cannot be "pickled" (saved to an external file) for later reuse. So, we added the option to launch `garnet.py` as a reusable background daemon, allowing successive pnr/test invocations to reuse the same circuit over and over.
 
-## USING THE DAEMON
+## Using the Daemon
 
 When doing regressions, you can use the `aha regress --daemon auto` option to tell `pnr` to use the daemon (or launch one if it does not yet exist).
 
