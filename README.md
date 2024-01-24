@@ -43,7 +43,7 @@ site!</i>
 hold metadata used by tools in the design flow
 
 * **[Lake repo explain](05_lake_repo.md)**
--- `Lake` is the design-specific language we use to generate memory tiles (right?)<br/>
+-- `Lake` is our DSL for generating memory tiles<br/>
 <i>Should this maybe just be a pointer to Lake's README file?</i>
 
 * **[PnR](07_pnr.md)**
