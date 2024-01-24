@@ -1,9 +1,11 @@
 ---
-title: Wiki Vs. Pages
+title: Github Wiki Vs. Github Pages
 author: steveri@stanford.edu
 date: 2024-01-24
 layout: post
 ---
+
+### Tradeoffs: Github Pages Vs. Github Wiki
 
 Currently we use Github Pages to implement our Aha wiki. But what if
 we used the native Github Wiki mechanism instead? Below are some of
