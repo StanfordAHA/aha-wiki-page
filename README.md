@@ -7,12 +7,14 @@ permalink: /
 
 ### AHA Quickstart Guide ###
 
-
 This website is for onboarding new students into the AHA project. The website describes how to use docker and the basic AHA application flow. To learn more about the project (people, publications, etc.) navigate to https://aha.stanford.edu/. 
 
+
 ### Table of Contents
-<i>Note TOC links only work on the Pages site!</i>
+<i>Note TOC links only work on the
 [Pages]([https://stanfordaha.github.io/aha-wiki-page/)
+site!</i>
+
 
 #### Development and Debugging
 
@@ -24,10 +26,12 @@ This website is for onboarding new students into the AHA project. The website de
 
 * **[Waveform Debugging Tips](09_waveform_debugging.md)**
 
+
 #### Hardware Architecture
 
 * **[Mem tile](04_lake.md)**
 -- An overview of the CGRA memory tile architecture.
+
 
 #### Software Architecture
 
@@ -47,6 +51,7 @@ hold metadata used by tools in the design flow
 
 * **[Garnet Daemon](11_daemon.md)**
 -- Use `garnet.py --daemon` for faster turnaround on dense-app PNR.
+
 
 #### Documentation
 
