@@ -1,11 +1,13 @@
 ---
 title: How To Wiki
 author: steveri@stanford.edu
-date: 2024-01-16 (Date used for order should be 2022-01-XX.)
+date: 2024-01-24
 layout: post
 ---
 
 <b>HOW TO WIKI</b> using Github Pages
+
+Everyone please contribute! Here's how:
 
 * clone or visit the `aha-wiki-page` repo
   [https://github.StanfordAHA.com/aha-wiki-page](https://github.StanfordAHA.com/aha-wiki-page)
