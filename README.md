@@ -11,10 +11,6 @@ This website is for onboarding new students into the AHA project. The website de
 
 
 ### Table of Contents
-<i>Note TOC links only work on the
-[Pages]([https://stanfordaha.github.io/aha-wiki-page/)
-site!</i>
-
 
 #### Development and Debugging
 
