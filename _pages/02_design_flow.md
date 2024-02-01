@@ -10,5 +10,5 @@ This is the old wiki, it has been decommissioned. The new wiki can be found here
 * [https://github.com/StanfordAHA/aha/wiki](https://github.com/StanfordAHA/aha/wiki)
 
 The particular page you were looking for can be found here maybe:
-* https://github.com/StanfordAHA/aha/wiki/CGRA-Design-Flow
+* [https://github.com/StanfordAHA/aha/wiki/CGRA-Design-Flow](https://github.com/StanfordAHA/aha/wiki/CGRA-Design-Flow)
 
