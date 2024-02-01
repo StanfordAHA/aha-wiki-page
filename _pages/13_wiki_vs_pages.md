@@ -5,16 +5,10 @@ date: 2024-01-24
 layout: post
 ---
 
-### Tradeoffs: Github Pages Vs. Github Wiki
+  
+This is the old wiki, it has been decommissioned. The new wiki can be found here:
+* [https://github.com/StanfordAHA/aha/wiki](https://github.com/StanfordAHA/aha/wiki)
 
-Currently we use Github Pages to implement our Aha wiki. But what if
-we used the native Github Wiki mechanism instead? Below are some of
-the tradeoffs, as I see them. Also, I have prepared prototypes so you
-can compare our docs as
-* [wiki version](https://github.com/StanfordAHA/aha/wiki) or
-* pages version
-[(source files)](https://github.com/StanfordAHA/aha-wiki-page)
-[(rendered pages)](https://stanfordaha.github.io/aha-wiki-page).
+The particular page you were looking for can be found here maybe:
+* https://github.com/StanfordAHA/aha/wiki/Github-Wiki-Vs.-Github-Pages
 
-You can see the tradeoffs discussion here:
-[https://github.com/StanfordAHA/aha/wiki/Github-Wiki-Vs.-Github-Pages](https://github.com/StanfordAHA/aha/wiki/Github-Wiki-Vs.-Github-Pages)
